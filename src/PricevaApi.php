@@ -9,10 +9,11 @@ namespace Sinbadxiii;
  * @author  Sergey Mukhin <sinbadxiii@gmail.com>
  * @version 1.0
  */
-
 class PricevaApi
 {
-
+    /**
+     * const base url
+     */
     const ENDPOINT_BASE = "https://app.priceva.com/api/v1";
 
     /**
@@ -43,7 +44,7 @@ class PricevaApi
     }
 
     /**
-     * @param $apiKey string
+     * @param string $apiKey
      */
     public function setApiKey($apiKey)
     {
@@ -77,32 +78,21 @@ class PricevaApi
      */
     public function getProduct($id, $term = true)
     {
-        $url = "product/list";
+        $products = $this->productList($id, 1, 1, $term);
 
-        $filter = (object)[
-            'params' =>  (object)[
-                'filters' => (object)[
-                    'active' => 1,
-                    'client_code' => [$id]
-                    ],
-                'sources' => (object) [
-                    'add_term' => $term
-                ]
-            ],
-        ];
-
-        $products = $this->request($url, $filter);
         return $products->result->objects[0];
     }
 
     /**
+     * get list goods
+     *
      * @url POST https://app.priceva.com/api/v1/product/list
      * @param int $page
      * @param int $limit
      * @return mixed
      */
 
-    public function productList($page = 1, $limit = 100)
+    public function productList($ids = [], $page = 1, $limit = 100, $term = true)
     {
         $url = "product/list";
 
@@ -111,10 +101,11 @@ class PricevaApi
                 'filters' => (object)[
                     'page'  => $page,
                     'limit' => $limit,
-                    'active' => 1
+                    'active' => 1,
+                    'client_code' => $ids
                     ],
                 'sources' => (object) [
-                    'add_term' => true
+                    'add_term' => $term
                 ]
             ],
         ];
@@ -123,6 +114,8 @@ class PricevaApi
     }
 
     /**
+     * reports on goods
+     *
      * @url POST https://app.priceva.com/api/v1/report/list
      * @param int $page
      * @param int $limit
@@ -149,6 +142,7 @@ class PricevaApi
     /**
      * test check access API
      *
+     * @url GET https://app.priceva.com/api/v1/main/ping
      * @return array
      */
     public function ping()

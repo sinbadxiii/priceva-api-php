@@ -1,6 +1,6 @@
 # Priceva API PHP
 
-Public API Priceva - Competitor Monitoring Price Tracking Solution https://priceva.ru.
+Public API Priceva - Competitor Monitoring Price Tracking Solution https://priceva.com.
 
 # Getting Started
 
