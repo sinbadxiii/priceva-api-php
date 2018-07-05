@@ -21,14 +21,51 @@ class PricevaApi
      */
     protected $apiKey;
 
+    /**
+     * list errors in fail request
+     * @var array
+     */
+    protected $errors = [];
+
+    /**
+     * count errors
+     * @var int
+     */
+    protected $countErrors = 0;
+
+    /**
+     * PricevaApi constructor.
+     * @param $config
+     */
     public function __construct($config)
     {
         $this->apiKey = $config['apiKey'];
     }
 
+    /**
+     * @param $apiKey string
+     */
     public function setApiKey($apiKey)
     {
         $this->apiKey = $apiKey;
+    }
+
+    /**
+     * get list errors
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * get count errors
+     * @return int
+     */
+    public function getCountErrors()
+    {
+        return $this->countErrors;
     }
 
     /**
@@ -58,6 +95,13 @@ class PricevaApi
         return $products->result->objects[0];
     }
 
+    /**
+     * @url POST https://app.priceva.com/api/v1/product/list
+     * @param int $page
+     * @param int $limit
+     * @return mixed
+     */
+
     public function productList($page = 1, $limit = 100)
     {
         $url = "product/list";
@@ -78,6 +122,13 @@ class PricevaApi
         return $this->request($url, $filter);
     }
 
+    /**
+     * @url POST https://app.priceva.com/api/v1/report/list
+     * @param int $page
+     * @param int $limit
+     * @return mixed
+     *
+     */
     public function reportList($page = 1, $limit = 100)
     {
         $url = "report/list";
@@ -93,6 +144,18 @@ class PricevaApi
         ];
 
         return $this->request($url, $filter);
+    }
+
+    /**
+     * test check access API
+     *
+     * @return array
+     */
+    public function ping()
+    {
+        $url = "main/ping";
+
+        return $this->request($url);
     }
 
 
@@ -121,6 +184,11 @@ class PricevaApi
 
         $response = json_decode(curl_exec($ch));
         curl_close($ch);
+
+        if (!empty($response->errors)) {
+            $this->errors      = $response->errors;
+            $this->countErrors = $response->errors_cnt;
+        }
 
         return $response;
 
