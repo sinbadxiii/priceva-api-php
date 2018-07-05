@@ -12,6 +12,5 @@
     },
     "autoload": {
         "psr-4": {"Sinbadxiii\\PricevaApi\\": "src/"}
-    },
-    "include-path": ["src/"],
+    }
 }
