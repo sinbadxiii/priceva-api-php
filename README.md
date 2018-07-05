@@ -2,8 +2,8 @@
 
 Публичное API сервиса мониторинга цен конкурентов Priceva https://priceva.ru.
 
-#Установка
+# Установка
 
-#Composer
+### Composer
 
 php composer require sinbadxiii/priceva-api-php:dev-master
