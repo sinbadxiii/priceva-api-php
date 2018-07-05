@@ -1,5 +1,6 @@
 {
-    "name": "sinbadxiii/priceva-api-php", 
+    "name": "sinbadxiii/priceva-api-php",
+    "type": "library",
     "repositories": [
         {
             "type": "git",
@@ -9,6 +10,15 @@
     "require": {
         "sinbadxiii/priceva-api-php": "dev-master",
         "guzzlehttp/guzzle": "~6.3"
-    }
+    },
+//    "autoload": {
+//        "classmap": [
+//            "src/"
+//        ]
+//    },
+    "autoload": {
+        "psr-4": {"Sinbadxiii\\PricevaApi\\": "src/"}
+    },
+    "include-path": ["src/"],
 }
 
