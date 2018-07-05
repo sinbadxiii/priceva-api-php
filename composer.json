@@ -1,3 +1,10 @@
+"repositories": [
+    {
+        "type": "git",
+        "url": "https://github.com/sinbadxiii/priceva-api-php"
+    },
+    {"packagist.org": false}
+],
 "require": {
     "sinbadxiii/priceva-api-php": "dev-master"
 }
