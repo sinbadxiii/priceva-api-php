@@ -7,7 +7,9 @@
         }
     ],
     "require": {
-        "sinbadxiii/priceva-api-php": "dev-master"
+        "sinbadxiii/priceva-api-php": "dev-master",
+        "guzzlehttp/guzzle": "~6.3"
+
     }
 }
 
