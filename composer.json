@@ -9,7 +9,6 @@
     ],
     "require": {
         "sinbadxiii/priceva-api-php": "dev-master",
-        "guzzlehttp/guzzle": "~6.3"
     },
     "autoload": {
         "psr-4": {"Sinbadxiii\\PricevaApi\\": "src/"}
