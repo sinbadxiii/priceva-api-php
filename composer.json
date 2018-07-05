@@ -11,6 +11,6 @@
         "php": ">=5.5"
     },
     "autoload": {
-        "psr-4": {"Sinbadxiii\\PricevaApi\\": "src/"}
+        "psr-4": {"Sinbadxiii\\": "src/"}
     }
 }

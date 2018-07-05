@@ -6,7 +6,7 @@
  * Time: 11:15
  */
 
-namespace Sinbadxiii;
+namespace Sinbadxiii\PricevaApi;
 
 class PricevaApi
 {
