@@ -1,4 +1,5 @@
-"repositories": [
+{
+    "repositories": [
     {
       "type": "git",
       "url": "https://github.com/sinbadxiii/priceva-api-php"
@@ -7,3 +8,4 @@
   "require": {
     "sinbadxiii/priceva-api-php": "dev-master"
   }
+}
