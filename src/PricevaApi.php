@@ -35,6 +35,12 @@ class PricevaApi
     protected $countErrors = 0;
 
     /**
+     * params filter
+     * @var
+     */
+    protected $filter;
+
+    /**
      * PricevaApi constructor.
      * @param $config
      */
@@ -70,6 +76,24 @@ class PricevaApi
     }
 
     /**
+     * set params filter
+     * @param $filter
+     */
+    public function setFilter($filter)
+    {
+        $this->filter = $filter;
+    }
+
+    /**
+     * get params filter
+     * @return array
+     */
+    public function getFilter()
+    {
+        return $this->filter;
+    }
+
+    /**
      * get one product by $id
      *
      * @param string $id The Id product
@@ -92,18 +116,17 @@ class PricevaApi
      * @return mixed
      */
 
-    public function productList($ids = [], $page = 1, $limit = 100, $term = true)
+    public function productList($filter = [], $term = true)
     {
         $url = "product/list";
 
+        if ($filter) {
+            $this->filter = $filter;
+        }
+
         $filter = (object)[
             'params' =>  (object)[
-                'filters' => (object)[
-                    'page'  => $page,
-                    'limit' => $limit,
-                    'active' => 1,
-                    'client_code' => $ids
-                    ],
+                'filters' => (object) $this->filter,
                 'sources' => (object) [
                     'add_term' => $term
                 ]
@@ -122,17 +145,17 @@ class PricevaApi
      * @return mixed
      *
      */
-    public function reportList($page = 1, $limit = 100)
+    public function reportList($filter = [])
     {
         $url = "report/list";
 
+        if ($filter) {
+            $this->filter = $filter;
+        }
+
         $filter = (object)[
             'params' =>  (object)[
-                'filters' => (object)[
-                    'page'  => $page,
-                    'limit' => $limit,
-                    'active' => 1
-                    ]
+                'filters' => (object) $filter
             ],
         ];
 
@@ -150,6 +173,16 @@ class PricevaApi
         $url = "main/ping";
 
         return $this->request($url);
+    }
+
+    /**
+     * create filter array for request
+     *
+     * @return Filter
+     */
+    public function createFilter()
+    {
+        return new Filter($this);
     }
 
 
